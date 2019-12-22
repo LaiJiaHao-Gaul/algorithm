@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = [];
+        for (var i = 0; i < 1000; i++) {
+            arr[i] = i * 2
+        }
+        function BinarySearch(target, array, start, end) {
+            var start = start || 0,
+                end = end || array.length - 1;
+
+            var mid = parseInt(start + (end - start) / 2)
+            if (start >= end && target != array[mid]) {
+                return -1;
+            } else if (target === array[mid]) {
+                return mid;
+            } else if (target > array[mid]) {
+                return BinarySearch(target, array, mid + 1, end)
+            } else {
+                return BinarySearch(target, array, start, mid - 1)
+            }
+        }
+    </script>
+</body>
+
+</html>
