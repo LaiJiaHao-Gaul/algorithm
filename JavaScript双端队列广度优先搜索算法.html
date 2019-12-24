@@ -25,7 +25,7 @@
                 return this.dataStore[this.dataStore.length - 1]
             }
             this.toString = function () {//显示队列所有元素
-                return this.dataStore.join('\n');
+                return this.dataStore
             };
             this.clear = function () { //清空当前队列
                 return this.dataStore = [];
@@ -44,31 +44,27 @@
         function BreadthFirstSearch(target, map, start) {
             var deque = new Deque(),
                 visited = [];
-            for(var i=0;i<map.get(start).length;i++){
-                // if(deque.dataStore.indexOf(start)===-1 && visited.indexOf(map.get(start)[i])===-1){
-                    deque.enqueue(map.get(start)[i])
-                // }
+            for (var i = 0; i < map.get(start).length; i++) {
+                deque.enqueue(map.get(start)[i])
             }
             visited.push(start)
-            // deque.enqueue(map.get(start))
-            // visited.push(start)
-            while(!deque.isEmpty()&&target!=deque.front()){
-                for(var i=0;i<map.get(deque.front()).length;i++){
-                        // 是否存在于访问队列                                         // 是否存在于被访问过的队列
-                    if((deque.dataStore.indexOf(map.get(deque.front())[i])===-1)&&(visited.indexOf(deque.front())===-1)){
-                        deque.enqueue(map.get(deque.front())[i])
-                        visited.push(deque.front())
-                        console.log(visited)
-                    }else if(visited.indexOf(deque.front())!==-1){
-                        console.log(deque.toString())
-                        console.log('ok')
-                        return true
+            while (!deque.isEmpty()) {
+                var node = deque.dequeue()
+                if (visited.indexOf(node) === -1) {
+                    for (var i of map.get(node)) {
+                        if ( i === target){
+                            return true
+                        }else if (deque.dataStore.indexOf(i) === -1) {
+                            if (visited.indexOf(i) === -1) {
+                                deque.enqueue(i);
+                            }
+                        }
                     }
-                    deque.dequeue()
+                    visited.push(node)
                 }
             }
+            return false;
         }
-
         var map = new Map()
         map.set('Ann', ['Ben', 'Nick'])
         map.set('Ben', ['Ann', 'Kid', 'Mod'])
@@ -80,7 +76,25 @@
         map.set('Tok', ['Nick', 'Cod', 'Tom'])
         map.set('Tom', ['Jack', 'Tok'])
 
-        BreadthFirstSearch('Tom',map,'Ann')
+        console.log(BreadthFirstSearch('Tom', map, 'Ann'))
+        console.log(BreadthFirstSearch('Ben', map, 'Ann'))
+        console.log(BreadthFirstSearch('Kid', map, 'Ann'))
+        console.log(BreadthFirstSearch('Mod', map, 'Ann'))
+        console.log(BreadthFirstSearch('Nick', map, 'Ann'))
+        console.log(BreadthFirstSearch('Cod', map, 'Ann'))
+        console.log(BreadthFirstSearch('Jack', map, 'Ann'))
+        console.log(BreadthFirstSearch('Tok', map, 'Ann'))
+        console.log(BreadthFirstSearch('aaa', map, 'Ann'))
+        console.log(BreadthFirstSearch('bbb', map, 'Ann'))
+        console.log(BreadthFirstSearch('ccc', map, 'Ann'))
+        console.log(BreadthFirstSearch('Ansssn', map, 'Ann'))
+        console.log(BreadthFirstSearch('sadsadsa', map, 'Ann'))
+        console.log(BreadthFirstSearch('Asadsadsadnn', map, 'Ann'))
+        console.log(BreadthFirstSearch('Asadsadnn', map, 'Ann'))
+        console.log(BreadthFirstSearch('Asadsadsnn', map, 'Ann'))
+        console.log(BreadthFirstSearch('Ansadsadsadn', map, 'Ann'))
+        console.log(BreadthFirstSearch('Anadadsadn', map, 'Ann'))
+        console.log(BreadthFirstSearch('Anasdsadn', map, 'Ann'))
     </script>
 </body>
 
