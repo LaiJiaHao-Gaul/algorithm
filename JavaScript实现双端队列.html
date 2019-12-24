@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function Deque() { // 双端队列
+            this.dataStore = [];
+            this.enqueue = function (val) {//入队
+                this.dataStore.push(val)
+            }
+            this.dequeue = function () {//出队
+                this.dataStore.shift()
+            }
+            this.front = function () { //查看队首元素
+                return this.dataStore[0]
+            };
+            this.back = function () { //查看队尾元素
+                return this.dataStore[this.dataStore.length - 1]
+            }
+            this.toString = function () {//显示队列所有元素
+                return this.dataStore.join('\n');
+            };
+            this.clear = function () { //清空当前队列
+                return this.dataStore = [];
+            }
+            this.isEmpty = function () { //判断当前队列是否为空
+                return (this.dataStore.length === 0);
+            }
+            this.addFront = function (val) { //添加元素到队列头部
+                this.dataStore.unshift(val)
+            }
+            this.removeBack = function(){ //删除队列尾部元素
+                this.pop();
+            }
+        }
+    </script>
+
+</body>
+
+</html>

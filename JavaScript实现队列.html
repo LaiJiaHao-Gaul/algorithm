@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function Queue() {
+            this.dataStore = [];
+            this.enqueue = function(sth){//入队
+                this.dataStore.push(sth)
+            }
+            this.dequeue = function(){//出队
+                this.dataStore.shift()
+            }
+            this.front = function(){ //查看队首元素
+                return this.dataStore[0]
+            };
+            this.back = function(){ //查看队尾元素
+                return this.dataStore[this.dataStore.length-1]
+            }
+            this.toString = function(){//显示队列所有元素
+                return this.dataStore.join('\n');
+            };   
+            this.clear = function(){ //清空当前队列
+                return this.dataStore = [];
+            }
+            this.isEmpty = function(){ //判断当前队列是否为空
+                return (this.dataStore.length ===0);
+            }
+        }
+
+        var arr = new Queue();
+
+        for(var i=0;i<5;i++){
+            arr.enqueue(i)
+        }
+        console.log(arr.toString())
+        console.log(arr.dequeue())
+        console.log(arr.toString())
+        console.log(arr.front()) //1
+        console.log(arr.back()) //4
+        console.log(arr.clear())
+        console.log(arr.isEmpty())
+    </script>
+</body>
+
+</html>
