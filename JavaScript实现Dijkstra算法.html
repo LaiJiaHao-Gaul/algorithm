@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var map = new Map(),
+            costs = new Map(),
+            parents = new Map(),
+            visited = [];
+
+        var startMap = new Map(),
+            aMap = new Map(),
+            bMap = new Map(),
+            finMap = new Map();
+        map.set('start',startMap)
+        map.get('start').set('a',6) 
+        map.get('start').set('b',2)
+        map.set('a',aMap)
+        map.get('a').set('fin',1)
+        map.set('b',bMap)
+        map.get('b').set('a',3)
+        map.get('b').set('fin',5)
+        map.set('fin',finMap)
+
+        costs = new Map();
+        costs.set('a',6)
+        costs.set('b',2)
+        costs.set('fin',Infinity)
+
+        parents = new Map();
+        parents.set('a','start')
+        parents.set('b','start')
+        parents.set('fin',null)
+        function Dijkstra(target,map,start){
+            var node = findLowestCostNode(costs)
+            while(node != null){
+                cost = costs.get(node)
+                neighbors = map.get(node);
+                for( i of neighbors.keys()) {
+                    var new_cost = cost + neighbors.get(i);
+                    if(costs.get(i) > new_cost){
+                        costs.set(i,new_cost)
+                        parents.set(i,node)
+                    }
+                }
+                visited.push(node)
+                node = findLowestCostNode(costs)
+            }
+        }
+        
+        function findLowestCostNode(costs){
+            var lowestCost = Infinity;
+            var lowestCostNode = null;
+            for(var i of costs.keys()){
+                cost = costs.get(i)
+                if(cost < lowestCost && (visited.indexOf(i)===-1)){
+                    lowestCost = cost
+                    lowestCostNode = i
+                }
+            }
+            return lowestCostNode;
+        }
+        Dijkstra('target',map,'start')
+    </script>
+</body>
+</html>
